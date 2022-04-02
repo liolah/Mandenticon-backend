@@ -6,11 +6,15 @@
   "scripts": {
     "build": "npx tsc",
     "start": "nodemon src/server.ts",
+    "jasmine": "jasmine-ts",
     "test": "npm run build && npm run jasmine"
   },
   "author": "Hesham Hany - Malak Elsayed",
   "license": "MIT",
   "dependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/jasmine": "^4.0.2",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "sharp": "^0.30.3"
   },
