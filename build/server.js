@@ -6,8 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
+const Mandala_1 = __importDefault(require("./services/Mandala"));
 const app = (0, express_1.default)();
-const port = 4000;
+const port = process.env.Port || 4000;
 app.use(body_parser_1.default.json());
 app.use((0, cors_1.default)());
 app.get("/hello", (req, res) => {
@@ -16,4 +17,5 @@ app.get("/hello", (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+(0, Mandala_1.default)();
 exports.default = app;

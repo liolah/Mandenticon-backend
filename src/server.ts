@@ -1,10 +1,10 @@
 import express, { Request, Response, Application } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import test from "./services/Mandala";
+import test from "./classes/mandala";
 
 const app: Application = express();
-const port = 4000;
+const port = process.env.Port || 4000;
 
 app.use(bodyParser.json());
 app.use(cors());
