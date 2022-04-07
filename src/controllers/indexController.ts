@@ -5,7 +5,6 @@ import { processImage } from "../services/imageProcessing";
 const generateRawMandala = (req: Request, res: Response) => {
   const data = req.params.data;
   const mandala = createMandala(data);
-  console.log(mandala);
   res.send(mandala);
 };
 
