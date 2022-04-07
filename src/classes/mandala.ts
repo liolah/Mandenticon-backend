@@ -116,9 +116,9 @@ class CenterPiece extends Pattern {
   generateUseElements(): string {
     return `<use href="#${
       this.id
-    }" transform-origin="center center" transform="rotate(0) translate(0, ${
+    }" transform-origin="center center" transform=" rotate(0) translate(0, ${
       this.radius + 7
-    }) scale(${this.scale})"/>`;
+    }) scale(${this.scale.toFixed(5)})"/>`;
   }
 }
 
@@ -170,8 +170,9 @@ class Layer extends Pattern {
     for (let i = 0; i < this.shapesNum; i++) {
       useElements += `<use href="#${
         this.id
-      }" transform-origin="center center" transform="rotate(${angle}) translate(0, ${-this
-        .radius}) scale(${this.scale})"/>`;
+      }" transform-origin="center center" transform="rotate(${angle}) translate(0, -${
+        this.radius
+      }) scale(${this.scale.toFixed(5)})"/>`;
       angle += 360 / this.shapesNum;
     }
     return useElements;
@@ -247,7 +248,7 @@ class RadialGradient extends Gradient {
 }
 
 class Mandala {
-  svgHeader = `<svg width="1000" height="1000" viewBox="0 0 1100 1100" xmlns="http://www.w3.org/2000/svg" style="border: #999 solid;">`;
+  svgHeader = `<svg width="1000" height="1000" viewBox="0 0 1100 1100" xmlns="http://www.w3.org/2000/svg">`;
   generalStyle = `<defs><style>.cls-2{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75px;}</style></defs>`;
   imageBackground: LinearGradient | RadialGradient | string | undefined;
   mandalaBackground: string;
