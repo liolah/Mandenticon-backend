@@ -1,12 +1,9 @@
 import sharp from "sharp";
+import fs from "fs";
 import { FormatEnum } from "sharp";
 import { createMandala } from "./mandalaService";
-
-
-// Edit image dimensions min 16 * 16, max 4096 * 4096. if null default to 500
-// EDit image format
-// Add greyScale effect
-// TODO: ADD tint control
+import svgRasterizer from "./svgRasterizationService";
+import path from "path";
 
 const isValidRequestParameters = (
   format: string,
@@ -57,23 +54,27 @@ const processImage = async (
     isValidRequestParameters(f, h, w);
     const data = d || `Something`;
     const mandala = createMandala(data);
-    const buff = Buffer.from(mandala, "utf8");
+    let rasterizedMandala;
     const height = h || 1200;
     const width = w || 1200;
     const format = f || "png";
     const greyScaleEffect = greyScale || false;
-    let processedImage: any;
+    const dir = path.resolve('temp');
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
+    let processedImage;
     if (greyScaleEffect) {
-      processedImage = await sharp(buff)
-        .resize(width, height)
+      rasterizedMandala = await svgRasterizer(mandala, format, width, height);
+      processedImage = await sharp(rasterizedMandala)
         .greyscale()
         .toFormat(format as keyof FormatEnum)
-        .toFile('../est.png');
+        .toFile(path.resolve(dir, `temp.${format}`));
     } else {
-      processedImage = await sharp(buff)
-        .resize(width, height)
+      rasterizedMandala = await svgRasterizer(mandala, format, width, height);
+      processedImage = await sharp(rasterizedMandala)
         .toFormat(format as keyof FormatEnum)
-        .toFile('./test.png');
+        .toFile(path.resolve(dir, `temp.${format}`));
     }
     return processedImage;
   } catch (error) {
