@@ -48,30 +48,40 @@ const processImage = async (
   h: number,
   f: string,
   greyScale: boolean,
+  tint: string,
   d: string
 ): Promise<Buffer> => {
   try {
     isValidRequestParameters(f, h, w);
     const data = d || `Something`;
     const mandala = createMandala(data);
-    let rasterizedMandala;
     const height = h || 1200;
     const width = w || 1200;
     const format = f || "png";
     const greyScaleEffect = greyScale || false;
-    const dir = path.resolve('temp');
+    const tintEffect = tint;
+    const dir = path.resolve("temp");
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }
+    const rasterizedMandala = await svgRasterizer(
+      mandala,
+      format,
+      width,
+      height
+    );
     let processedImage;
     if (greyScaleEffect) {
-      rasterizedMandala = await svgRasterizer(mandala, format, width, height);
       processedImage = await sharp(rasterizedMandala)
         .greyscale()
         .toFormat(format as keyof FormatEnum)
         .toFile(path.resolve(dir, `temp.${format}`));
+    } else if (tintEffect && !greyScaleEffect) {
+      processedImage = await sharp(rasterizedMandala)
+        .tint(`#${tint}`)
+        .toFormat(format as keyof FormatEnum)
+        .toFile(path.resolve(dir, `temp.${format}`));
     } else {
-      rasterizedMandala = await svgRasterizer(mandala, format, width, height);
       processedImage = await sharp(rasterizedMandala)
         .toFormat(format as keyof FormatEnum)
         .toFile(path.resolve(dir, `temp.${format}`));

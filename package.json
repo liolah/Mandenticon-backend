@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "start": "nodemon src/server.ts",
     "jasmine": "jasmine-ts",
-    "test": "npm run build && npm run jasmine"
+    "test": "npm run jasmine"
   },
   "author": "Hesham Hany - Malak Elsayed",
   "license": "MIT",
@@ -24,9 +24,10 @@
     "@types/jasmine": "^4.0.2",
     "@types/node": "^17.0.23",
     "@types/sharp": "^0.30.0",
-    "jasmine": "^4.0.2",
+    "@types/supertest": "^2.0.12",
+    "jasmine": "^3.6.4",
     "jasmine-spec-reporter": "^7.0.0",
-    "jasmine-ts": "^0.4.0",
+    "jasmine-ts": "^0.3.0",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2",
     "ts-node": "^10.7.0",

@@ -19,3 +19,4 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}, Address: http://localhost:${port}`);
 });
 exports.default = app;
+// http://localhost:4000/api/Malak?width=2000&height=2000&r=0&b=150&g=150&greyScale=true

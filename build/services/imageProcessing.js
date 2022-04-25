@@ -41,30 +41,35 @@ const isValidRequestParameters = (format, height, width) => {
     }
 };
 exports.isValidRequestParameters = isValidRequestParameters;
-const processImage = async (w, h, f, greyScale, d) => {
+const processImage = async (w, h, f, greyScale, tint, d) => {
     try {
         isValidRequestParameters(f, h, w);
         const data = d || `Something`;
         const mandala = (0, mandalaService_1.createMandala)(data);
-        let rasterizedMandala;
         const height = h || 1200;
         const width = w || 1200;
         const format = f || "png";
         const greyScaleEffect = greyScale || false;
-        const dir = path_1.default.resolve('temp');
+        const tintEffect = tint;
+        const dir = path_1.default.resolve("temp");
         if (!fs_1.default.existsSync(dir)) {
             fs_1.default.mkdirSync(dir);
         }
+        const rasterizedMandala = await (0, svgRasterizationService_1.default)(mandala, format, width, height);
         let processedImage;
         if (greyScaleEffect) {
-            rasterizedMandala = await (0, svgRasterizationService_1.default)(mandala, format, width, height);
             processedImage = await (0, sharp_1.default)(rasterizedMandala)
                 .greyscale()
                 .toFormat(format)
                 .toFile(path_1.default.resolve(dir, `temp.${format}`));
         }
+        else if (tintEffect && !greyScaleEffect) {
+            processedImage = await (0, sharp_1.default)(rasterizedMandala)
+                .tint(`#${tint}`)
+                .toFormat(format)
+                .toFile(path_1.default.resolve(dir, `temp.${format}`));
+        }
         else {
-            rasterizedMandala = await (0, svgRasterizationService_1.default)(mandala, format, width, height);
             processedImage = await (0, sharp_1.default)(rasterizedMandala)
                 .toFormat(format)
                 .toFile(path_1.default.resolve(dir, `temp.${format}`));

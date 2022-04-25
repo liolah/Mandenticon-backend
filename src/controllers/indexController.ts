@@ -5,7 +5,7 @@ import path from "path";
 import fs from "fs";
 
 const generateRawMandala = (req: Request, res: Response) => {
-  const data = req.params.data;
+  const data = req.params.data || "Hesham";
   const mandala = createMandala(data);
   res.send(mandala);
 };
@@ -18,7 +18,8 @@ const generateMandalaImage = async (req: Request, res: Response) => {
       req.query.height as unknown as number,
       req.query.format as unknown as string,
       req.query.greyScale as unknown as boolean,
-      req.params.data
+      req.query.tint as unknown as string,
+      req.params.data || "Hesham"
     );
     res.sendFile(
       path.resolve(

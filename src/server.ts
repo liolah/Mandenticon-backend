@@ -19,3 +19,5 @@ app.listen(port, () => {
 });
 
 export default app;
+
+// http://localhost:4000/api/Malak?width=2000&height=2000&r=0&b=150&g=150&greyScale=true
