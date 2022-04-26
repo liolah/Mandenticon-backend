@@ -1,7 +1,7 @@
 import unitTests from "./units/unitTests";
 import integrationTests from "./integration/integrationTests";
-import endpointTests from "./integration/integrationTests";
+import endpointTests from "./endpoints/endpointTests";
 
-// unitTests();
+unitTests();
 integrationTests();
-// endpointTests();
+endpointTests();

@@ -124,7 +124,7 @@ export default function () {
         "test",
         "test"
       );
-      expect(results).toBeUndefined();
+      expect(results).toBeTruthy();
     });
   });
 }
