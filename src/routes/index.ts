@@ -3,8 +3,8 @@ import { generateRawMandala, generateMandalaImage } from "../controllers/indexCo
 const router = Router();
 
 router.get("/raw/:data", generateRawMandala);
-// router.get("/raw", generateRawMandala);
+router.get("/raw", generateRawMandala);
 router.get("/api/:data", generateMandalaImage);
-// router.get("/api", generateMandalaImage);
+router.get("/api", generateMandalaImage);
 
 export default router;
