@@ -59,7 +59,7 @@ const processImage = async (
     const width = w || 1200;
     const format = f || "png";
     const greyScaleEffect = greyScale == "true" ? true : false;
-    const tintEffect = tint;
+    const tintEffect = tint && tint != "ffffff";
     const dir = path.resolve("temp");
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
