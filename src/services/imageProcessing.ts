@@ -47,7 +47,7 @@ const processImage = async (
   w: number,
   h: number,
   f: string,
-  greyScale: boolean,
+  greyScale: string,
   tint: string,
   d: string
 ): Promise<Buffer> => {
@@ -58,7 +58,7 @@ const processImage = async (
     const height = h || 1200;
     const width = w || 1200;
     const format = f || "png";
-    const greyScaleEffect = greyScale || false;
+    const greyScaleEffect = greyScale == "true" ? true : false;
     const tintEffect = tint;
     const dir = path.resolve("temp");
     if (!fs.existsSync(dir)) {

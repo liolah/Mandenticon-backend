@@ -17,7 +17,7 @@ const generateMandalaImage = async (req: Request, res: Response) => {
       req.query.width as unknown as number,
       req.query.height as unknown as number,
       req.query.format as unknown as string,
-      req.query.greyScale as unknown as boolean,
+      req.query.greyScale as unknown as string,
       req.query.tint as unknown as string,
       req.params.data || "Hesham"
     );
