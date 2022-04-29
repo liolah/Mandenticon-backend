@@ -24,7 +24,7 @@ export default function () {
     it('Function "processImage" returns a buffer containing the processed image', async () => {
       expect(async () => {
         try {
-          return await processImage(200, 200, "png", true, "000000", "test");
+          return await processImage(200, 200, "png", "true", "000000", "test");
         } catch (error) {
           throw new Error(error as unknown as string);
         }
